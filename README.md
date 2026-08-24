@@ -1,16 +1,16 @@
-# C-Verse
+<div align="center"> <pre> 
 
-### A lightweight physics engine for indie games.
-
-```text
    ██████╗       ██╗   ██╗███████╗██████╗ ███████╗███████╗
   ██╔════╝       ██║   ██║██╔════╝██╔══██╗██╔════╝██╔════╝
   ██║     █████╗ ██║   ██║█████╗  ██████╔╝███████╗█████╗
   ██║     ╚════╝ ╚██╗ ██╔╝██╔══╝  ██╔══██╗╚════██║██╔══╝
   ╚██████╗        ╚████╔╝ ███████╗██║  ██║███████║███████╗
    ╚═════╝         ╚═══╝  ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝
-```
+</pre>
 
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=00FF9C&center=true&vCenter=true&width=440&lines=light-weight;functional;for+indie+developers.)](https://git.io/typing-svg)
+
+</div>
 ---
 
 ## `> What is this?`
