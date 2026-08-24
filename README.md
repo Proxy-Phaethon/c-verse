@@ -11,7 +11,6 @@
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1000&color=00FF9C&center=true&vCenter=true&width=440&lines=light-weight;functional;for+indie+developers.)](https://git.io/typing-svg)
 
 </div>
----
 
 ## `> What is this?`
 
@@ -177,44 +176,6 @@ They tend to do that.
 
 ---
 
-## `> Architecture`
-
-The long-term structure is intended to remain roughly separated like this:
-
-```text
-                    GAME
-                     │
-                     ▼
-              ┌─────────────┐
-              │   C-VERSE   │
-              │     API     │
-              └──────┬──────┘
-                     │
-          ┌──────────┼──────────┐
-          ▼          ▼          ▼
-       WORLD      BODIES     SHAPES
-          │          │          │
-          └──────────┼──────────┘
-                     ▼
-               SIMULATION
-                     │
-          ┌──────────┴──────────┐
-          ▼                     ▼
-      COLLISION              DYNAMICS
-          │                     │
-          └──────────┬──────────┘
-                     ▼
-                  STATE
-```
-
-Rendering is intentionally outside the core.
-
-C-Verse should know where an object is.
-
-It should not care whether you draw it as a circle, a spaceship, or a badly textured potato.
-
----
-
 ## `> Development`
 
 C-Verse is being built from the bottom up.
@@ -247,31 +208,6 @@ The laws of physics remain annoyingly indifferent to project scope.
 
 ---
 
-## `> Current Progress`
-
-```text
-MATHEMATICS
-████░░░░░░░░░░░░░░░░  20%
-
-RIGID BODY DYNAMICS
-░░░░░░░░░░░░░░░░░░░░   0%
-
-COLLISION
-░░░░░░░░░░░░░░░░░░░░   0%
-
-CONSTRAINTS
-░░░░░░░░░░░░░░░░░░░░   0%
-
-ENGINE
-██░░░░░░░░░░░░░░░░░░  10%
-
-UNDERSTANDING WHY THE BOX
-IS FALLING THROUGH THE FLOOR
-████░░░░░░░░░░░░░░░░░░  20%
-```
-
----
-
 ## `> Why Build Another Physics Engine?`
 
 There are already excellent physics engines.
@@ -298,151 +234,12 @@ If it eventually becomes useful to someone else's game, even better.
 
 ---
 
-## `> Philosophy`
-
-```text
-Understand the mathematics.
-        ↓
-Implement the smallest useful version.
-        ↓
-Test it.
-        ↓
-Break it.
-        ↓
-Find out why.
-        ↓
-Make it better.
-        ↓
-Repeat.
-```
-
-A physics engine is ultimately a collection of approximations.
-
-The interesting part is learning which approximations are acceptable, which ones explode spectacularly, and why.
-
----
-
-## `> Example`
-
-Eventually, using C-Verse should look something like:
-
-```cpp
-cverse::World world;
-
-world.set_gravity({0.0f, -9.81f});
-
-auto floor = world.create_body(
-    cverse::BodyType::Static
-);
-
-floor.add_box({20.0f, 1.0f});
-
-auto box = world.create_body(
-    cverse::BodyType::Dynamic
-);
-
-box.set_position({0.0f, 10.0f});
-box.add_box({1.0f, 1.0f});
-
-while (game_running)
-{
-    world.step(delta_time);
-
-    // Render the world however you want.
-}
-```
-
-The API will change.
-
-The laws of gravity probably won't.
-
----
-
-## `> Project Structure`
-
-The project is intended to remain modular and easy to navigate.
-
-```text
-c-verse/
-│
-├── include/
-│   └── cverse/
-│
-├── src/
-│   ├── math/
-│   ├── dynamics/
-│   ├── collision/
-│   ├── constraints/
-│   └── world/
-│
-├── examples/
-│
-├── tests/
-│
-├── docs/
-│
-├── CMakeLists.txt
-├── LICENSE
-└── README.md
-```
-
----
-
-## `> Long-Term`
-
-C-Verse is intended to grow gradually rather than attempting to implement every feature of a commercial physics engine from day one.
-
-Possible future areas include:
-
-```text
-2D
- │
- ├── rigid bodies
- ├── collision
- ├── friction
- ├── joints
- └── sleeping
-       │
-       ▼
-   PERFORMANCE
-       │
-       ├── spatial partitioning
-       ├── broad phase
-       └── SIMD
-       │
-       ▼
-      3D
-       │
-       ├── 3D collision
-       ├── rigid bodies
-       └── constraints
-```
-
-The first target is deliberately smaller:
-
-**make 2D physics work properly.**
-
-Everything else can wait its turn.
-
----
-
 ## `> License`
 
 C-Verse is open source and will be released under the MIT License.
 
 ---
-
-```text
-╔══════════════════════════════════════════╗
-║                                          ║
-║              C - V E R S E               ║
-║                                          ║
-║        PHYSICS, FROM FIRST PRINCIPLES.   ║
-║                                          ║
-║          THE WORLD IS JUST MATH.         ║
-║                                          ║
-╚══════════════════════════════════════════╝
-```
+<div align="center">
 
 C-Verse is a work in progress.
 
@@ -451,3 +248,5 @@ Build the simulation.
 Understand the machinery.
 
 Then make something move.
+
+</div>
