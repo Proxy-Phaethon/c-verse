@@ -15,245 +15,192 @@
 
 <div align="center">
 
-[![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
+[![Python](https://img.shields.io/badge/python-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 
 </div>
 
-## `> What is this?`
+# C-Verse
 
-C-Verse is a lightweight, open-source physics engine being built for indie game developers.
+**A lightweight computer vision engine written in Python.**
 
-The goal is simple:
+C-Verse is an experimental computer vision project focused on understanding and implementing the mathematical and algorithmic foundations behind visual computing.
 
-**give a game developer the physics they need without giving them an entire universe of engine machinery they don't.**
+Rather than treating computer vision as a collection of high-level library calls, C-Verse is designed as a laboratory for building vision algorithms, studying their mathematics, and understanding how visual information can be represented, transformed, and analyzed computationally.
 
-C-Verse is being developed from scratch in C++ as an exploration of physics simulation, numerical methods, collision detection, rigid-body dynamics, and the engineering required to turn mathematical models into something a game can actually use.
+## Overview
 
-It is not trying to be the biggest physics engine.
-
-It is trying to be a useful one.
-
----
-
-## `> The Idea`
-
-A physics engine ultimately does something rather strange.
-
-You give it a collection of objects.
-
-You give those objects properties.
-
-You give the world forces and constraints.
-
-Then, repeatedly:
+C-Verse explores the pipeline:
 
 ```text
-                 WORLD
-                   │
-                   ▼
-          ┌─────────────────┐
-          │     FORCES      │
-          └────────┬────────┘
-                   │
-                   ▼
-          ┌─────────────────┐
-          │    INTEGRATE    │
-          └────────┬────────┘
-                   │
-                   ▼
-          ┌─────────────────┐
-          │    COLLISION    │
-          │    DETECTION    │
-          └────────┬────────┘
-                   │
-                   ▼
-          ┌─────────────────┐
-          │    COLLISION    │
-          │    RESPONSE     │
-          └────────┬────────┘
-                   │
-                   ▼
-          ┌─────────────────┐
-          │     UPDATE      │
-          │      WORLD      │
-          └────────┬────────┘
-                   │
-                   └───────────┐
-                               │
-                               ▼
-                            NEXT STEP
+Image
+  │
+  ▼
+Representation
+  │
+  ▼
+Preprocessing
+  │
+  ▼
+Transformation
+  │
+  ▼
+Feature Extraction
+  │
+  ▼
+Analysis
+  │
+  ▼
+Result
 ```
 
-Then you do it again.
+The project is being developed incrementally, with each subsystem built around explicit mathematical and computational foundations.
 
-And again.
+## Goals
 
-And again.
+* Implement fundamental computer vision algorithms in Python.
+* Develop an understanding of the mathematics underlying visual computing.
+* Build reusable and modular vision-processing components.
+* Explore image representation and transformation.
+* Experiment with feature extraction and visual analysis.
+* Study the trade-offs between algorithmic simplicity, correctness, and performance.
+* Provide a foundation for more advanced computer vision and graphics research.
 
-At some point, the square stops falling through the floor.
+## Architecture
 
-That is the general idea.
-
----
-
-## `> Design Goals`
-
-C-Verse is being built around a few constraints.
+C-Verse is organized around independent components rather than a single monolithic vision pipeline.
 
 ```text
-             C-VERSE
-                │
-       ┌────────┼────────┐
-       ▼        ▼        ▼
-    LIGHTWEIGHT SIMPLE  USEFUL
-       │        │        │
-       ▼        ▼        ▼
-    small      clear    games
-    runtime    API      first
+c-verse/
+│
+├── cverse/
+│   ├── core/
+│   │   ├── image.py
+│   │   ├── pixel.py
+│   │   └── ...
+│   │
+│   ├── math/
+│   │   ├── vectors.py
+│   │   ├── matrices.py
+│   │   └── ...
+│   │
+│   ├── vision/
+│   │   ├── filtering.py
+│   │   ├── edges.py
+│   │   ├── features.py
+│   │   └── ...
+│   │
+│   └── ...
+│
+├── tests/
+├── docs/
+├── examples/
+├── pyproject.toml
+└── README.md
 ```
 
-### Lightweight
+The exact module structure will evolve as the engine develops.
 
-C-Verse should be practical for small games and projects where a full engine dependency would be unnecessary.
+## Mathematical Foundations
 
-### Understandable
+Computer vision is fundamentally mathematical. C-Verse therefore treats mathematics as part of the implementation rather than an external dependency.
 
-The implementation should remain readable enough that someone can actually study how the simulation works.
+Areas of study include:
 
-### Modular
+* Vectors and matrices
+* Linear transformations
+* Convolution
+* Numerical methods
+* Probability
+* Image statistics
+* Coordinate systems
+* Geometric transformations
+* Optimization
+* Signal processing
 
-Collision detection should not be welded permanently to rendering.
-
-The physics world should not care which graphics API a game uses.
-
-The engine should provide the machinery and let the game decide what to do with it.
-
-### Game-oriented
-
-This is ultimately a game physics engine.
-
-Mathematical correctness matters.
-
-So does making the API pleasant to use.
-
----
-
-## `> What C-Verse Will Handle`
-
-The engine is being developed around the fundamental pieces of a rigid-body physics system.
+For example, image filtering can be represented as a convolution:
 
 ```text
-PHYSICS
-│
-├── Mathematics
-│   ├── Vectors
-│   ├── Matrices
-│   ├── Transforms
-│   └── Numerical utilities
-│
-├── World
-│   ├── Bodies
-│   ├── Forces
-│   ├── Gravity
-│   └── Simulation
-│
-├── Collision
-│   ├── Shapes
-│   ├── Broad phase
-│   ├── Narrow phase
-│   ├── Contact generation
-│   └── Collision response
-│
-├── Dynamics
-│   ├── Linear motion
-│   ├── Angular motion
-│   ├── Mass
-│   ├── Inertia
-│   └── Integration
-│
-└── Constraints
-    ├── Contacts
-    ├── Friction
-    └── Joints
+I' = I * K
 ```
 
-The exact architecture will evolve as the implementation exposes where the mathematics and engineering disagree.
+where `I` is an image, `K` is a kernel, and `I'` is the resulting image.
 
-They tend to do that.
+The purpose of implementing these operations directly is to understand what happens underneath higher-level computer vision abstractions.
 
----
+## Current Development
 
-## `> Development`
+C-Verse is being developed incrementally.
 
-C-Verse is being built from the bottom up.
+Current areas of development include:
 
-The implementation will begin with the mathematical machinery before moving into increasingly complex simulation systems.
+* Image representation
+* Pixel operations
+* Mathematical primitives
+* Image transformations
+* Filtering
+* Edge detection
+* Feature extraction
+* Computer vision pipelines
+
+Advanced techniques will be introduced only after their underlying concepts are understood and implemented.
+
+## Design Philosophy
+
+C-Verse follows a few simple principles:
+
+**Understand before abstracting.**
+
+Core algorithms should be understood mathematically before being hidden behind convenient interfaces.
+
+**Prefer explicit implementations.**
+
+Where practical, fundamental operations are implemented directly rather than delegated entirely to high-level computer vision APIs.
+
+**Keep components modular.**
+
+Individual algorithms should be usable independently and composable into larger pipelines.
+
+**Experiment scientifically.**
+
+Algorithms should be testable against known inputs and their behavior should be measurable rather than assumed.
+
+## Documentation
+
+Detailed documentation will cover both the software and mathematical foundations of the project.
 
 ```text
-[✓] Project structure
-[ ] Vector mathematics
-[ ] Transforms
-[ ] Rigid bodies
-[ ] Forces
-[ ] Integration
-[ ] Basic shapes
-[ ] Collision detection
-[ ] Collision response
-[ ] Friction
-[ ] Constraints
-[ ] Broad-phase detection
-[ ] Joints
-[ ] Spatial partitioning
-[ ] Performance optimisation
-[ ] Documentation
-[ ] Examples
+docs/
+├── architecture/
+├── mathematics/
+├── algorithms/
+└── experiments/
 ```
 
-The checklist will probably become more ambitious.
+The documentation is intended to explain not only **how** an algorithm works, but also **why** it works.
 
-The laws of physics remain annoyingly indifferent to project scope.
+## Technology
 
----
+* Python
+* NumPy
+* Scientific computing libraries where appropriate
+* Computer vision tooling where appropriate
+* Git / GitHub
 
-## `> Why Build Another Physics Engine?`
+Core algorithms are implemented with an emphasis on understanding their underlying mechanics rather than simply wrapping existing implementations.
 
-There are already excellent physics engines.
+## Project Status
 
-That is not really the point.
+C-Verse is an active research and learning project.
 
-C-Verse exists because building a physics engine is an unusually good way to understand several areas of computer science and game development at once:
+The engine is intentionally being built from the fundamentals upward, so its capabilities will expand alongside the mathematical and algorithmic systems underneath it.
 
-* linear algebra
-* numerical integration
-* geometry
-* collision detection
-* simulation
-* data structures
-* performance engineering
-* memory management
-* API design
+## License
 
-The objective is not to compete with mature physics middleware immediately.
-
-The objective is to understand the machinery well enough to build one.
-
-If it eventually becomes useful to someone else's game, even better.
-
----
-
-## `> License`
-
-C-Verse is open source and will be released under the MIT License.
+MIT License
 
 ---
 <div align="center">
 
-C-Verse is a work in progress.
-
-Build the simulation.
-
-Understand the machinery.
-
-Then make something move.
+*C-Verse is a laboratory for computational vision: images in, mathematics underneath, information out.*
 
 </div>
